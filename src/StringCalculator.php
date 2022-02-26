@@ -37,12 +37,10 @@ class StringCalculator
         $input_string = str_replace("\n",",",$input_string);
         $pos1 = strpos($input_string, ",");
         $pos2 = strpos($input_string, ",",offset: $pos1+1);
-        if(($pos2-$pos1) ==1){
-            return "Number expected...";
-        }
-        else{
-            return "Everything works";
-        }
-    }
-
+        $error="Number expected but newline found at position ";
+        return $error.=strval($pos2);
+       }
 }
+
+
+

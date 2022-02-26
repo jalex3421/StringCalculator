@@ -61,8 +61,11 @@ class StringCalculatorTest  extends TestCase{
     public function add_new_line_restrictor(){
         $stringCalculator = new StringCalculator();
         $res = $stringCalculator->calculateAddNewLineRestrictor("175.2,\n35");
-        $this->assertEquals("Number expected...",$res);
+        echo $res;
+        $this->assertEquals("Number expected but newline found at position 6",$res);
     }
+
+
 
 
 }
