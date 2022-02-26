@@ -28,7 +28,6 @@ class StringCalculator
 
     public function calculateAddNewLine(string $input_string):float{
         $input_string = str_replace("\n",",",$input_string);
-        //echo $input_string;
         $numbers = array_map('floatval', explode(',', $input_string));
         return array_sum($numbers);
     }
@@ -53,6 +52,20 @@ class StringCalculator
         $output="Separator is ";
         //echo $input_string[4];
         return $output.=$separator;
+    }
+
+    public function obtainCustomSeparatorsRestrictor(string $input_string):string{
+        $separator = $input_string[2];
+        $err1=" expected,but ";
+        $err2=" found";
+        for($i=4;$i<=strlen($input_string)-1;$i++){
+            if($i%2!==0){
+                if(strcmp($input_string[5],$separator)!==0){
+                    return $separator.$err1.$input_string[5].$err2;
+                }
+            }
+        }
+        return "Nothing wrong";
     }
 
 
