@@ -47,5 +47,15 @@ class StringCalculatorTest  extends TestCase{
         $this->assertIsInt($res);
     }
 
+    /**
+     * @test : devuelve la suma de una secuencia separadas por coma o saltos de linea
+     */
+    public function add_new_line(){
+        $stringCalculator = new StringCalculator();
+        $res = $stringCalculator->calculateAddNewLine("1\n8,3");
+        echo $res;
+        $this->assertIsInt($res);
+    }
+
 
 }

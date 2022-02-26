@@ -26,4 +26,11 @@ class StringCalculator
         return array_sum($numbers);
     }
 
+    public function calculateAddNewLine(string $input_string):int{
+        $input_string = str_replace("\n",",",$input_string);
+        //echo $input_string;
+        $numbers = array_map('intval', explode(',', $input_string));
+        return array_sum($numbers);
+    }
+
 }
