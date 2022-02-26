@@ -28,5 +28,14 @@ class StringCalculatorTest  extends TestCase{
         $this->assertNotEmpty($res); //assert
     }
 
+    /**
+     * @test : devuelve el valor entero de una cadena
+     */
+    public function string_to_int(){
+        $stringCalculator = new StringCalculator();
+        $res = $stringCalculator->calculateStringToInt("1");
+        $this->assertIsInt($res); //assert
+    }
+
 
 }
