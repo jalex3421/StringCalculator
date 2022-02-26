@@ -87,12 +87,25 @@ class StringCalculatorTest  extends TestCase{
     /**
      * @test : permite introducir propios separadores, y verifica
      */
-    public function find_custom_separator(){
+    public function find_custom_separator_restrictor(){
         $stringCalculator = new StringCalculator();
-        $res = $stringCalculator->obtainCustomSeparatorsRestrictor("//;\n1,3");
+        $res = $stringCalculator->obtainCustomSeparatorsRestrictor("//sep\n2sep3");
+        echo $res;
+        $this->assertEquals(5,$res);
+    }
+
+    /*
+    /**
+     * @test : permite introducir propios separadores, verifica y suma elementos
+     */
+
+    /*
+    public function custom_separators(){
+        $stringCalculator = new StringCalculator();
+        $res = $stringCalculator->obtainCustomSeparatorsRestrictor("//,\n1,3");
         echo $res;
         $this->assertEquals("; expected,but , found",$res);
-    }
+    }*/
 
 
 
