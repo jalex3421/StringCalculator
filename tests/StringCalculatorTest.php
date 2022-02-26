@@ -33,8 +33,8 @@ class StringCalculatorTest  extends TestCase{
      */
     public function string_to_int(){
         $stringCalculator = new StringCalculator();
-        $res = $stringCalculator->calculateStringToInt("1");
-        $this->assertIsInt($res); //assert
+        $res = $stringCalculator->calculateStringToFloat("1.1");
+        $this->assertIsFloat($res); //assert
     }
 
     /**
@@ -42,9 +42,8 @@ class StringCalculatorTest  extends TestCase{
      */
     public function add(){
         $stringCalculator = new StringCalculator();
-        $res = $stringCalculator->calculateAdd("1,2,3,4,5");
-        echo $res;
-        $this->assertIsInt($res);
+        $res = $stringCalculator->calculateAdd("1.1,2,3,4.1,5");
+        $this->assertIsFloat($res);
     }
 
     /**
@@ -52,9 +51,17 @@ class StringCalculatorTest  extends TestCase{
      */
     public function add_new_line(){
         $stringCalculator = new StringCalculator();
-        $res = $stringCalculator->calculateAddNewLine("1\n8,3");
-        echo $res;
-        $this->assertIsInt($res);
+        $res = $stringCalculator->calculateAddNewLine("1\n2,3");
+        $this->assertEquals(6,$res);
+    }
+
+    /**
+     * @test : funcionamiento igual que anterior, salvo que no permite '/n'al final
+     */
+    public function add_new_line_restrictor(){
+        $stringCalculator = new StringCalculator();
+        $res = $stringCalculator->calculateAddNewLineRestrictor("175.2,\n35");
+        $this->assertEquals("Number expected...",$res);
     }
 
 

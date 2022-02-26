@@ -17,20 +17,32 @@ class StringCalculator
         else{return "";}
     }
 
-    public function calculateStringToInt(string $input_string):int{
-       return intval($input_string);
+    public function calculateStringToFloat(string $input_string):float{
+       return floatval($input_string);
     }
 
-    public function calculateAdd(string $input_string):int{
-        $numbers = array_map('intval', explode(',', $input_string));
+    public function calculateAdd(string $input_string):float{
+        $numbers = array_map('floatval', explode(',', $input_string));
         return array_sum($numbers);
     }
 
-    public function calculateAddNewLine(string $input_string):int{
+    public function calculateAddNewLine(string $input_string):float{
         $input_string = str_replace("\n",",",$input_string);
         //echo $input_string;
-        $numbers = array_map('intval', explode(',', $input_string));
+        $numbers = array_map('floatval', explode(',', $input_string));
         return array_sum($numbers);
+    }
+
+    public function calculateAddNewLineRestrictor(string $input_string):string{
+        $input_string = str_replace("\n",",",$input_string);
+        $pos1 = strpos($input_string, ",");
+        $pos2 = strpos($input_string, ",",offset: $pos1+1);
+        if(($pos2-$pos1) ==1){
+            return "Number expected...";
+        }
+        else{
+            return "Everything works";
+        }
     }
 
 }
