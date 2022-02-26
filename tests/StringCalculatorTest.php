@@ -75,6 +75,15 @@ class StringCalculatorTest  extends TestCase{
         $this->assertEquals("Number expected but EOF found",$res);
     }
 
+    /**
+     * @test : permite introducir propios separadores
+     */
+    public function find_custom_separator(){
+        $stringCalculator = new StringCalculator();
+        $res = $stringCalculator->obtainCustomSeparators("//;\n1;3");
+        $this->assertEquals("Separator is ;",$res);
+    }
+
 
 
 

@@ -48,6 +48,14 @@ class StringCalculator
         return "Nothing wrong";
     }
 
+    public function obtainCustomSeparators(string $input_string):string{
+        $separator = $input_string[2];
+        $output="Separator is ";
+        //echo $input_string[4];
+        return $output.=$separator;
+    }
+
+
 
 }
 
