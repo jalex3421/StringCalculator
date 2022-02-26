@@ -39,7 +39,16 @@ class StringCalculator
         $pos2 = strpos($input_string, ",",offset: $pos1+1);
         $error="Number expected but newline found at position ";
         return $error.=strval($pos2);
-       }
+    }
+
+    public function calculateAddEOFLineRestrictor(string $input_string):string{
+        if( (intval($input_string[strlen($input_string)-1])) ==0){
+            return "Number expected but EOF found";
+        }
+        return "Nothing wrong";
+    }
+
+
 }
 
 

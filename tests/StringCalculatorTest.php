@@ -65,6 +65,16 @@ class StringCalculatorTest  extends TestCase{
         $this->assertEquals("Number expected but newline found at position 6",$res);
     }
 
+    /**
+     * @test : no permite que secuencia acabe con separador
+     */
+    public function eof_new_line_restrictor(){
+        $stringCalculator = new StringCalculator();
+        $res = $stringCalculator->calculateAddEOFLineRestrictor("1,3,");
+        echo $res;
+        $this->assertEquals("Number expected but EOF found",$res);
+    }
+
 
 
 
