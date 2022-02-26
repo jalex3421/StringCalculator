@@ -11,11 +11,22 @@ use PHPUnit\Framework\TestCase;
 class StringCalculatorTest  extends TestCase{
 
     /**
-     * @test : determina que 1 no tiene factores
+     * @test : determina que String es empty
      */
     public function string_is_empty(){
         $stringCalculator = new StringCalculator();
-        $res = $stringCalculator->calculateEmpty("0");
+        $res = $stringCalculator->calculateEmpty("");
         $this->assertEquals("0",$res); //assert
     }
+
+    /**
+     * @test : determina que String es no empty
+     */
+    public function string_is_not_empty(){
+        $stringCalculator = new StringCalculator();
+        $res = $stringCalculator->calculateNotEmpty("");
+        $this->assertNotEmpty($res); //assert
+    }
+
+
 }

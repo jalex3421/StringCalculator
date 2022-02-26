@@ -13,4 +13,10 @@ class StringCalculator
         else{return "-1";}
     }
 
+    public function calculateNotEmpty(string $input_string):string
+    {
+        if(!empty($input_string)){ return "Not empty";}
+        else{return "";}
+    }
+
 }
