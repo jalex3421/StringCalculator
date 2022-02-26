@@ -37,5 +37,15 @@ class StringCalculatorTest  extends TestCase{
         $this->assertIsInt($res); //assert
     }
 
+    /**
+     * @test : devuelve la suma de una secuencia separadas por coma
+     */
+    public function add(){
+        $stringCalculator = new StringCalculator();
+        $res = $stringCalculator->calculateAdd("1,2,3,4,5");
+        echo $res;
+        $this->assertIsInt($res);
+    }
+
 
 }

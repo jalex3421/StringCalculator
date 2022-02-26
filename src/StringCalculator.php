@@ -21,4 +21,9 @@ class StringCalculator
        return intval($input_string);
     }
 
+    public function calculateAdd(string $input_string):int{
+        $numbers = array_map('intval', explode(',', $input_string));
+        return array_sum($numbers);
+    }
+
 }
