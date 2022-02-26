@@ -113,6 +113,27 @@ class StringCalculator
         return "Nothing wrong";
     }
 
+    private function doestAllowRestrictorsWhenAreTogether(string $input_string, string $separator):string{
+        $results = preg_split('/[;,]/', $input_string);
+        $contains_empty = in_array("", $results, true);
+        $err1 =  "Number expected but ";
+        $err2 =" found";
+        if($contains_empty==1){
+            return $err1.$separator.$err2;
+        }else{
+            return "";
+        }
+    }
+
+    public function obtainMultipleErrors(string $input_string):string{
+        if(empty($input_string)){ return "0";}
+        $multipleNegatives=$this->obtainMultipleNegatives($input_string);
+        $restrictorsTogether=$this->doestAllowRestrictorsWhenAreTogether($input_string,",");
+        return  $multipleNegatives."\n".$restrictorsTogether;
+    }
+
+
+
 
 
 
