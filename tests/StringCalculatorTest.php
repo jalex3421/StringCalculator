@@ -61,7 +61,6 @@ class StringCalculatorTest  extends TestCase{
     public function add_new_line_restrictor(){
         $stringCalculator = new StringCalculator();
         $res = $stringCalculator->calculateAddNewLineRestrictor("175.2,\n35");
-        echo $res;
         $this->assertEquals("Number expected but newline found at position 6",$res);
     }
 
@@ -71,7 +70,6 @@ class StringCalculatorTest  extends TestCase{
     public function eof_new_line_restrictor(){
         $stringCalculator = new StringCalculator();
         $res = $stringCalculator->calculateAddEOFLineRestrictor("1,3,");
-        echo $res;
         $this->assertEquals("Number expected but EOF found",$res);
     }
 
@@ -90,19 +88,26 @@ class StringCalculatorTest  extends TestCase{
     public function find_custom_separator_restrictor(){
         $stringCalculator = new StringCalculator();
         $res = $stringCalculator->obtainCustomSeparatorsRestrictor("//sep\n3sep2");
-        echo $res;
         $this->assertEquals(5,$res);
     }
 
 
     /**
-     * @test : no se permite el uso de numeros negativos
+     * @test : no se permite el uso de numeros negativos (uno)
      */
     public function find_one_negative(){
         $stringCalculator = new StringCalculator();
-        $res = $stringCalculator->obtainOneNegative("1,-2");
-        echo $res;
-        $this->assertEquals("Negative not allowed: -2",$res);
+        $res = $stringCalculator->obtainOneNegative("-1,2");
+        $this->assertEquals("Negative not allowed: -1",$res);
+    }
+
+    /**
+     * @test : no se permite el uso de numeros negativos
+     */
+    public function find_multiple_negatives(){
+        $stringCalculator = new StringCalculator();
+        $res = $stringCalculator->obtainMultipleNegatives("2,-4,-5");
+        $this->assertEquals("Negatives not allowed: -4-5",$res);
     }
 
 

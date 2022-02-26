@@ -74,7 +74,6 @@ class StringCalculator
         if(count($input_numbers)>1){
             return strval(array_sum($input_numbers));
         }else{
-            echo "estoy aqui";
             foreach ($input_numbers as $maybe_a_number) {
                 $input_numbers= str_split($maybe_a_number);
                 $position_fake_delimiter=0;
@@ -97,6 +96,20 @@ class StringCalculator
         foreach($numbers as $value) {
             if($value < 0) {return $errormessage.strval($value);}
         }
+        return "Nothing wrong";
+    }
+
+    public function obtainMultipleNegatives(string $input_string):string{
+        if(empty($input_string)){ return "0";}
+        $numbers = array_map('floatval', explode(',', $input_string));
+        $errormessage = "Negatives not allowed: ";
+        $original_length = strlen($errormessage);
+        foreach($numbers as $value) {
+            if($value < 0) {
+                $errormessage.=strval($value);
+            }
+        }
+        if(strlen($errormessage)>$original_length){return $errormessage; }
         return "Nothing wrong";
     }
 
