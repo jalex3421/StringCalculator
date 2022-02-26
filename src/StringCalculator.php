@@ -58,7 +58,6 @@ class StringCalculator
         $second_filter = substr($first_filter, strpos($first_filter, "/") + 1);
         $separator = substr($second_filter, strpos($second_filter, "/") + 1);
         $output="Separator is ";
-        //echo $input_string[4];
         return $output.=$separator;
     }
 
@@ -75,6 +74,7 @@ class StringCalculator
         if(count($input_numbers)>1){
             return strval(array_sum($input_numbers));
         }else{
+            echo "estoy aqui";
             foreach ($input_numbers as $maybe_a_number) {
                 $input_numbers= str_split($maybe_a_number);
                 $position_fake_delimiter=0;
@@ -89,6 +89,18 @@ class StringCalculator
         }
 
     }
+
+    public function obtainOneNegative(string $input_string):string{
+        if(empty($input_string)){ return "0";}
+        $numbers = array_map('floatval', explode(',', $input_string));
+        $errormessage = "Negative not allowed: ";
+        foreach($numbers as $value) {
+            if($value < 0) {return $errormessage.strval($value);}
+        }
+        return "Nothing wrong";
+    }
+
+
 
 
 

@@ -89,23 +89,21 @@ class StringCalculatorTest  extends TestCase{
      */
     public function find_custom_separator_restrictor(){
         $stringCalculator = new StringCalculator();
-        $res = $stringCalculator->obtainCustomSeparatorsRestrictor("//sep\n2sep3");
+        $res = $stringCalculator->obtainCustomSeparatorsRestrictor("//sep\n3sep2");
         echo $res;
         $this->assertEquals(5,$res);
     }
 
-    /*
-    /**
-     * @test : permite introducir propios separadores, verifica y suma elementos
-     */
 
-    /*
-    public function custom_separators(){
+    /**
+     * @test : no se permite el uso de numeros negativos
+     */
+    public function find_one_negative(){
         $stringCalculator = new StringCalculator();
-        $res = $stringCalculator->obtainCustomSeparatorsRestrictor("//,\n1,3");
+        $res = $stringCalculator->obtainOneNegative("1,-2");
         echo $res;
-        $this->assertEquals("; expected,but , found",$res);
-    }*/
+        $this->assertEquals("Negative not allowed: -2",$res);
+    }
 
 
 
