@@ -22,7 +22,7 @@ class StringCalculatorTest  extends TestCase{
      * @test : check if string is empty
      */
     public function string_is_empty(){
-        $res = $this->stringCalculator->calculateEmpty("");
+        $res = $this->stringCalculator->add("");
         $this->assertEquals("0",$res); //assert
     }
 
@@ -30,40 +30,33 @@ class StringCalculatorTest  extends TestCase{
      * @test : check if string is not empty
      */
     public function string_is_not_empty(){
-        $res = $this->stringCalculator->calculateNotEmpty("3");
+        $res = $this->stringCalculator->add("3");
         $this->assertEquals("Not empty",$res); //assert
     }
 
-    /**
-     * @test : return float value from string
-     */
-    public function string_to_float(){
-        $res = $this->stringCalculator->calculateStringToFloat("3.3");
-        $this->assertEquals(3.3,$res); //assert
-    }
 
     /**
      * @test : return sum of two numbers , deliminator:  comma
      */
     public function add_two_numbers(){
-        $res = $this->stringCalculator->calculateAddTwoNumbers("2,3.3");
-        $this->assertEquals(5.3,$res);
+        $res = $this->stringCalculator->add("2,3.3");
+        $this->assertEquals("5.3",$res);
     }
 
     /**
      * @test : return sum of a given sequence , delimitator:  comma
      */
     public function add(){
-        $res = $this->stringCalculator->calculateAdd("1.1,2,3,4.1,5");
-        $this->assertIsFloat($res);
+        $res = $this->stringCalculator->add("1.1,2,3,4.1,5");
+        $this->assertEquals("15.2",$res);
     }
 
     /**
      * @test : return sum of a given sequence , delimitator: new line or comma
      */
     public function add_new_line(){
-        $res = $this->stringCalculator->calculateAddNewLine("1\n2,3");
-        $this->assertEquals(6,$res);
+        $res = $this->stringCalculator->add("1\n2,3");
+        $this->assertEquals("6",$res);
     }
 
     /**
@@ -78,7 +71,7 @@ class StringCalculatorTest  extends TestCase{
      * @test : doesnt allow that an input sequence ended with a separator
      */
     public function eof_new_line_restrictor(){
-        $res =$this->stringCalculator->calculateAddEOFLineRestrictor("1,3,");
+        $res =$this->stringCalculator->add("1,3,");
         $this->assertEquals("Number expected but EOF found",$res);
     }
 
