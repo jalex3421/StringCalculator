@@ -97,7 +97,7 @@ class StringCalculatorTest  extends TestCase{
      */
     public function find_one_negative(){
         $res = $this->stringCalculator->add("-1,2");
-        $this->assertEquals("Negatives not allowed: -1",$res);
+        $this->assertEquals("Negatives not allowed: -1\n",$res);
     }
 
     /**
@@ -105,14 +105,14 @@ class StringCalculatorTest  extends TestCase{
      */
     public function find_multiple_negatives(){
         $res = $this->stringCalculator->add("2,-4,-5");
-        $this->assertEquals("Negatives not allowed: -4-5",$res);
+        $this->assertEquals("Negatives not allowed: -4-5\n",$res);
     }
 
     /**
      * @test : trigger multiple errors if it is necessary
      */
     public function multiple_errors(){
-        $res = $this->stringCalculator->obtainMultipleErrors("-1,,2");
+        $res = $this->stringCalculator->add("-1,,2");
         $this->assertEquals("Negatives not allowed: -1\nNumber expected but , found",$res);
     }
 

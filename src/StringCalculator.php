@@ -19,7 +19,7 @@ class StringCalculator
             if( (intval($input_string[strlen($input_string)-1])) ==0){
                 return "Number expected but EOF found";
             }
-            elseif(!empty($error_message=$this->obtainMultipleNegatives($input_string))){
+            elseif(!empty($error_message=$this->obtainMultipleErrors($input_string))){
                 return $error_message;
             }
             return strval(($this->calculateAddNewLine($input_string)));
@@ -49,6 +49,13 @@ class StringCalculator
         return "";
     }
 
+    private function obtainMultipleErrors(string $input_string):string{
+        if(empty($input_string)){ return "0";}
+        $multipleNegatives=$this->obtainMultipleNegatives($input_string);
+        $restrictorsTogether=$this->doestAllowRestrictorsWhenAreTogether($input_string,",");
+        return  $multipleNegatives."\n".$restrictorsTogether;
+    }
+
     public function calculateAddNewLineRestrictor(string $input_string):string{
         if(empty($input_string)){ return "0";}
         $pos1 = strpos($input_string, ","); //obtain position of comma
@@ -56,8 +63,6 @@ class StringCalculator
         $error="Number expected but newline found at position ";
         return $error.=strval($pos1+$pos2);
     }
-
-
 
     public function obtainCustomSeparators(string $input_string):string{
         if(empty($input_string)){ return "0";}
@@ -105,12 +110,6 @@ class StringCalculator
         }
     }
 
-    public function obtainMultipleErrors(string $input_string):string{
-        if(empty($input_string)){ return "0";}
-        $multipleNegatives=$this->obtainMultipleNegatives($input_string);
-        $restrictorsTogether=$this->doestAllowRestrictorsWhenAreTogether($input_string,",");
-        return  $multipleNegatives."\n".$restrictorsTogether;
-    }
 
     public function calculateProduct(string $input_string):float{
         if(empty($input_string)){ return "0";}
