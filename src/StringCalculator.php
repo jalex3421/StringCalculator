@@ -68,32 +68,19 @@ class StringCalculator
         return $output.=$separator;
     }
 
-    public function obtainCustomSeparatorsRestrictor(string $input_string):string{
+    public function AddWithCustomSeparator(string $input_string):string{
         if(empty($input_string)){ return "0";}
-        $first_filter = strtok($input_string,"\n");
-        $second_filter = substr($first_filter, strpos($first_filter, "/") + 1);
-        $separator = substr($second_filter, strpos($second_filter, "/") + 1);
-        $pos_separator = strlen($separator) + 2;
         $err1=" expected ";
         $err2=" found: ";
         $err3=" at position : ";
-        $input_numbers = explode($separator,substr($input_string, $pos_separator + 1));
-        if(count($input_numbers)>1){
-            return strval(array_sum($input_numbers));
-        }else{
-            foreach ($input_numbers as $maybe_a_number) {
-                $input_numbers= str_split($maybe_a_number);
-                $position_fake_delimiter=0;
-                foreach ($input_numbers as $char) {
-                    if (intval($char) == 0) {
-                        $fake_delimiter = $char;
-                        return $err1 . $separator . $err2 . $fake_delimiter.$err3.$position_fake_delimiter;
-                    }
-                    $position_fake_delimiter++;
-                }
-            }
+        if(str_starts_with($input_string, '//')) {
+            //list: allow to have individual variables from array
+            list($delimiter, $numbers) = explode("\n", $input_string, 2);
+            //offset 2 cuz at position 0 and 1 are '//'
+            $delimiter = '/' . substr($delimiter, 2) . '/';
         }
-
+        $numbers = preg_split($delimiter, $numbers);
+        return array_sum($numbers);
     }
 
     public function obtainOneNegative(string $input_string):string{
