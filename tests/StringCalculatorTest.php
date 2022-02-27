@@ -94,8 +94,9 @@ class StringCalculatorTest  extends TestCase{
      * @test : allow to introduce your own separators and verify the syntax of given input
      */
     public function add_with_custom_separator_restrictor(){
-        $res = $this->stringCalculator->AddWithCustomSeparator("//sep\n3sep2");
-        $this->assertEquals(5,$res);
+        #REVISAR!!
+        $res = $this->stringCalculator->AddWithCustomSeparator("//|\n3|2,1");
+        $this->assertEquals(6,$res);
     }
 
 

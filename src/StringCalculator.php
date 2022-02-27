@@ -60,11 +60,12 @@ class StringCalculator
 
     public function obtainCustomSeparators(string $input_string):string{
         if(empty($input_string)){ return "0";}
-        $first_filter = strtok($input_string,"\n");
-        $second_filter = substr($first_filter, strpos($first_filter, "/") + 1);
-        $separator = substr($second_filter, strpos($second_filter, "/") + 1);
+        if(str_starts_with($input_string, '//')) {
+            list($sep, $numbers) = explode("\n", $input_string, 2);
+            $sep = substr($sep, 2);
+        }
         $output="Separator is ";
-        return $output.=$separator;
+        return $output.=$sep;
     }
 
     public function AddWithCustomSeparator(string $input_string):string{
