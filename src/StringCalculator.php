@@ -4,6 +4,8 @@
 namespace Deg540\PHPTestingBoilerplate;
 
 
+use phpDocumentor\Reflection\Types\Null_;
+
 class StringCalculator
 {
     const DELIMITERS_BY_DEFAULT = "/,|\n/";
@@ -16,28 +18,51 @@ class StringCalculator
             return "Not empty";
         }
         else{
+            $error = $this->obtainMultipleErrors($input_string);
             if( (intval($input_string[strlen($input_string)-1])) ==0){
                 return "Number expected but EOF found";
             }
-            elseif(!empty($error_message=$this->obtainMultipleErrors($input_string))){
-                return $error_message;
+            elseif(strlen($error)>1){
+                return $error;
             }
-            return strval(($this->calculateAddNewLine($input_string)));
+            else{
+                return strval(($this->calculateNewLine($input_string,"sum")));
+            }
         }
-
     }
 
+    public function multiply(string $input_string):string{
+        if(empty($input_string)){
+            return "0";
+        }
+        elseif(is_numeric($input_string)){
+            return "Not empty";
+        }
+        else{
+            $error = $this->obtainMultipleErrors($input_string);
+            if( (intval($input_string[strlen($input_string)-1])) ==0){
+                return "Number expected but EOF found";
+            }
+            elseif(strlen($error)>1){
+                return $error;
+            }
+            else{
+                return strval(($this->calculateNewLine($input_string,"multiply")));
+            }
+        }
+    }
 
-    private function calculateAddNewLine(string $input_string):float{
-        if(empty($input_string)){ return "0";}
+    private function calculateNewLine(string $input_string,string $op):float{
         //search patter in input string and split it
         $numbers = preg_spliT(self::DELIMITERS_BY_DEFAULT,$input_string);
-        return array_sum($numbers);
+        if(strcmp($op,"sum")==0){
+            return array_sum($numbers);
+        }
+        return array_product($numbers);
     }
 
     private function obtainMultipleNegatives(string $input_string):string{
-        if(empty($input_string)){ return "0";}
-        $numbers = array_map('floatval', explode(',', $input_string));
+        $numbers = preg_spliT(self::DELIMITERS_BY_DEFAULT,$input_string);
         $errormessage = "Negatives not allowed: ";
         $original_length = strlen($errormessage);
         foreach($numbers as $value) {
@@ -45,15 +70,14 @@ class StringCalculator
                 $errormessage.=strval($value);
             }
         }
-        if(strlen($errormessage)>$original_length){return $errormessage; }
+        if(strlen($errormessage)>$original_length){return $errormessage."\n"; }
         return "";
     }
 
     private function obtainMultipleErrors(string $input_string):string{
-        if(empty($input_string)){ return "0";}
         $multipleNegatives=$this->obtainMultipleNegatives($input_string);
         $restrictorsTogether=$this->doestAllowRestrictorsWhenAreTogether($input_string,",");
-        return  $multipleNegatives."\n".$restrictorsTogether;
+        return  $multipleNegatives.$restrictorsTogether;
     }
 
     public function calculateAddNewLineRestrictor(string $input_string):string{
@@ -95,9 +119,6 @@ class StringCalculator
         return array_sum($numbers);
     }
 
-
-
-
     private function doestAllowRestrictorsWhenAreTogether(string $input_string, string $separator):string{
         $results = preg_split('/[;,]/', $input_string);
         $contains_empty = in_array("", $results, true);
@@ -109,7 +130,6 @@ class StringCalculator
             return "";
         }
     }
-
 
     public function calculateProduct(string $input_string):float{
         if(empty($input_string)){ return "0";}

@@ -34,7 +34,6 @@ class StringCalculatorTest  extends TestCase{
         $this->assertEquals("Not empty",$res); //assert
     }
 
-
     /**
      * @test : return sum of two numbers , deliminator:  comma
      */
@@ -91,7 +90,6 @@ class StringCalculatorTest  extends TestCase{
         $this->assertEquals("expected | found: , at position : 3",$res);
     }
 
-
     /**
      * @test : doesnt allow one negative number in sequence
      */
@@ -120,8 +118,8 @@ class StringCalculatorTest  extends TestCase{
      * @test : return product of a given sequence , delimitator:  comma
      */
     public function multiply(){
-        $res = $this->stringCalculator->calculateProduct("7,7,2");
-        $this->assertEquals(98,$res);
+        $res = $this->stringCalculator->multiply("7,7,2");
+        $this->assertEquals("98",$res);
     }
 
 }
