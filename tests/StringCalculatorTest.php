@@ -30,16 +30,24 @@ class StringCalculatorTest  extends TestCase{
      * @test : check if string is not empty
      */
     public function string_is_not_empty(){
-        $res = $this->stringCalculator->calculateNotEmpty("abcd");
-        $this->assertNotEmpty($res); //assert
+        $res = $this->stringCalculator->calculateNotEmpty("3");
+        $this->assertEquals("Not empty",$res); //assert
     }
 
     /**
      * @test : return float value from string
      */
-    public function string_to_int(){
-        $res = $this->stringCalculator->calculateStringToFloat("1.1");
-        $this->assertIsFloat($res); //assert
+    public function string_to_float(){
+        $res = $this->stringCalculator->calculateStringToFloat("3.3");
+        $this->assertEquals(3.3,$res); //assert
+    }
+
+    /**
+     * @test : return sum of two numbers , deliminator:  comma
+     */
+    public function add_two_numbers(){
+        $res = $this->stringCalculator->calculateAddTwoNumbers("2,3.3");
+        $this->assertEquals(5.3,$res);
     }
 
     /**

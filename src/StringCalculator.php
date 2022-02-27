@@ -22,6 +22,12 @@ class StringCalculator
        return floatval($input_string);
     }
 
+    public function calculateAddTwoNumbers(string $input_string):float{
+        if(empty($input_string)){ return "0";}
+        $numbers = array_map('floatval', explode(',', $input_string));
+        return array_sum($numbers);
+    }
+
     public function calculateAdd(string $input_string):float{
         if(empty($input_string)){ return "0";}
         $numbers = array_map('floatval', explode(',', $input_string));
