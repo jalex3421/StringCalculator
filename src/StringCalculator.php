@@ -70,14 +70,20 @@ class StringCalculator
 
     public function AddWithCustomSeparator(string $input_string):string{
         if(empty($input_string)){ return "0";}
-        $err1=" expected ";
-        $err2=" found: ";
-        $err3=" at position : ";
+        $err1="expected ";
+        $err2=" but ";
+        $err3=" found: ";
+        $err4=" at position : ";
         if(str_starts_with($input_string, '//')) {
             //list: allow to have individual variables from array
             list($delimiter, $numbers) = explode("\n", $input_string, 2);
             //offset 2 cuz at position 0 and 1 are '//'
+            $aux = substr($delimiter, 2);
             $delimiter = '/' . substr($delimiter, 2) . '/';
+        }
+        if(!empty($pos_fake_delimiter =strpos($numbers, ","))){
+            $fake_delimiter=",";
+            return $err1.$aux.$err3.$fake_delimiter.$err4.$pos_fake_delimiter;
         }
         $numbers = preg_split($delimiter, $numbers);
         return array_sum($numbers);
@@ -131,10 +137,6 @@ class StringCalculator
         $numbers = array_map('floatval', explode(',', $input_string));
         return array_product($numbers);
     }
-
-
-
-
 
 }
 
