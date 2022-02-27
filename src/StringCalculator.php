@@ -19,6 +19,9 @@ class StringCalculator
             if( (intval($input_string[strlen($input_string)-1])) ==0){
                 return "Number expected but EOF found";
             }
+            elseif(!empty($error_message=$this->obtainMultipleNegatives($input_string))){
+                return $error_message;
+            }
             return strval(($this->calculateAddNewLine($input_string)));
         }
 
@@ -30,6 +33,20 @@ class StringCalculator
         //search patter in input string and split it
         $numbers = preg_spliT(self::DELIMITERS_BY_DEFAULT,$input_string);
         return array_sum($numbers);
+    }
+
+    private function obtainMultipleNegatives(string $input_string):string{
+        if(empty($input_string)){ return "0";}
+        $numbers = array_map('floatval', explode(',', $input_string));
+        $errormessage = "Negatives not allowed: ";
+        $original_length = strlen($errormessage);
+        foreach($numbers as $value) {
+            if($value < 0) {
+                $errormessage.=strval($value);
+            }
+        }
+        if(strlen($errormessage)>$original_length){return $errormessage; }
+        return "";
     }
 
     public function calculateAddNewLineRestrictor(string $input_string):string{
@@ -73,29 +90,8 @@ class StringCalculator
         return array_sum($numbers);
     }
 
-    public function obtainOneNegative(string $input_string):string{
-        if(empty($input_string)){ return "0";}
-        $numbers = array_map('floatval', explode(',', $input_string));
-        $errormessage = "Negative not allowed: ";
-        foreach($numbers as $value) {
-            if($value < 0) {return $errormessage.strval($value);}
-        }
-        return "Nothing wrong";
-    }
 
-    public function obtainMultipleNegatives(string $input_string):string{
-        if(empty($input_string)){ return "0";}
-        $numbers = array_map('floatval', explode(',', $input_string));
-        $errormessage = "Negatives not allowed: ";
-        $original_length = strlen($errormessage);
-        foreach($numbers as $value) {
-            if($value < 0) {
-                $errormessage.=strval($value);
-            }
-        }
-        if(strlen($errormessage)>$original_length){return $errormessage; }
-        return "Nothing wrong";
-    }
+
 
     private function doestAllowRestrictorsWhenAreTogether(string $input_string, string $separator):string{
         $results = preg_split('/[;,]/', $input_string);

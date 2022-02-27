@@ -96,15 +96,15 @@ class StringCalculatorTest  extends TestCase{
      * @test : doesnt allow one negative number in sequence
      */
     public function find_one_negative(){
-        $res = $this->stringCalculator->obtainOneNegative("-1,2");
-        $this->assertEquals("Negative not allowed: -1",$res);
+        $res = $this->stringCalculator->add("-1,2");
+        $this->assertEquals("Negatives not allowed: -1",$res);
     }
 
     /**
      * @test : doesnt allow multiple negative numbers in sequence
      */
     public function find_multiple_negatives(){
-        $res = $this->stringCalculator->obtainMultipleNegatives("2,-4,-5");
+        $res = $this->stringCalculator->add("2,-4,-5");
         $this->assertEquals("Negatives not allowed: -4-5",$res);
     }
 
