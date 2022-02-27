@@ -6,6 +6,7 @@ namespace Deg540\PHPTestingBoilerplate;
 
 class StringCalculator
 {
+    const DELIMITERS_BY_DEFAULT = "/,|\n/";
 
     public function calculateEmpty(string $input_string):string{
         if(empty($input_string)){ return "0";}
@@ -36,8 +37,8 @@ class StringCalculator
 
     public function calculateAddNewLine(string $input_string):float{
         if(empty($input_string)){ return "0";}
-        $input_string = str_replace("\n",",",$input_string);
-        $numbers = array_map('floatval', explode(',', $input_string));
+        //search patter in input string and divide it
+        $numbers = preg_spliT(self::DELIMITERS_BY_DEFAULT,$input_string);
         return array_sum($numbers);
     }
 
