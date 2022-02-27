@@ -37,18 +37,17 @@ class StringCalculator
 
     public function calculateAddNewLine(string $input_string):float{
         if(empty($input_string)){ return "0";}
-        //search patter in input string and divide it
+        //search patter in input string and split it
         $numbers = preg_spliT(self::DELIMITERS_BY_DEFAULT,$input_string);
         return array_sum($numbers);
     }
 
     public function calculateAddNewLineRestrictor(string $input_string):string{
         if(empty($input_string)){ return "0";}
-        $input_string = str_replace("\n",",",$input_string);
-        $pos1 = strpos($input_string, ",");
-        $pos2 = strpos($input_string, ",",offset: $pos1+1);
+        $pos1 = strpos($input_string, ","); //obtain position of comma
+        $pos2 = strpos(substr($input_string,$pos1), "\n");
         $error="Number expected but newline found at position ";
-        return $error.=strval($pos2);
+        return $error.=strval($pos1+$pos2);
     }
 
     public function calculateAddEOFLineRestrictor(string $input_string):string{
