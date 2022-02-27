@@ -4,7 +4,7 @@
 namespace Deg540\PHPTestingBoilerplate;
 
 
-use phpDocumentor\Reflection\Types\Null_;
+
 
 class StringCalculator
 {
@@ -129,12 +129,6 @@ class StringCalculator
         }else{
             return "";
         }
-    }
-
-    public function calculateProduct(string $input_string):float{
-        if(empty($input_string)){ return "0";}
-        $numbers = array_map('floatval', explode(',', $input_string));
-        return array_product($numbers);
     }
 
 }
