@@ -10,7 +10,7 @@ class StringCalculatorRules
     public function calculateAddNewLineRestrictor(string $input_string):string{
         $pos1 = strpos($input_string, ","); //obtain position of comma
         $error="Number expected but newline found at position ";
-        if(strpos(substr($input_string,$pos1), "\n") !== false){
+        if(str_contains(substr($input_string, $pos1), "\n")){
             $pos2 = strpos(substr($input_string,$pos1), "\n");
             return $error.=strval($pos1+$pos2);
         }
@@ -62,4 +62,27 @@ class StringCalculatorRules
         }
     }
 
+    public function addWithCustomSeparator(string $input_string):string{
+        $err1="expected ";
+        $err2=" but ";
+        $err3=" found: ";
+        $err4=" at position : ";
+        if(str_starts_with($input_string, '//')) {
+            //list: allow to have individual variables from array
+            list($delimiter, $numbers) = explode("\n", $input_string, 2);
+            //offset 2 cuz at position 0 and 1 are '//'
+            $aux = substr($delimiter, 2);
+            $delimiter = '/' . substr($delimiter, 2) . '/';
+
+            if(!empty($pos_fake_delimiter =strpos($numbers, ","))){
+                $fake_delimiter=",";
+                return $err1.$aux.$err3.$fake_delimiter.$err4.$pos_fake_delimiter;
+            }
+            $numbers = preg_split($delimiter, $numbers);
+            return array_sum($numbers);
+        }else{
+            return "nok";
+        }
+
+    }
 }

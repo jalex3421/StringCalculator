@@ -82,19 +82,10 @@ class StringCalculatorTest  extends TestCase{
     }
 
     /**
-     * @test : allow to introduce your own separators
-     */
-    public function findCustomSeparatorBase(){
-        $res = $this->stringCalculator->add("//;\n1;3");
-
-        $this->assertEquals("Separator is ;",$res);
-    }
-
-    /**
      * @test : allow to introduce your own separators and verify the syntax of given input
      */
     public function addWithCustomSeparatorRestrictor(){
-        $res = $this->stringCalculator->addWithCustomSeparator("//|\n3|2,1");
+        $res = $this->stringCalculator->add("//|\n3|2,1");
 
         $this->assertEquals("expected | found: , at position : 3",$res);
     }

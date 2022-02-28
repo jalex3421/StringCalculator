@@ -19,9 +19,10 @@ class StringCalculator
         else{
             if( (intval($input_string[strlen($input_string)-1])) ==0){
                 return "Number expected but EOF found";
-            }elseif(strcmp($rules->obtainCustomSeparators($input_string),"Separator is ")!==0){
-                return $rules->obtainCustomSeparators($input_string);
-            }elseif(strcmp($rules->calculateAddNewLineRestrictor($input_string),"Number expected but newline found at position ")!==0){
+            }elseif(strcmp($rules->addWithCustomSeparator($input_string),"nok")!==0){
+                return $rules->addWithCustomSeparator($input_string);
+            }
+            elseif(strcmp($rules->calculateAddNewLineRestrictor($input_string),"Number expected but newline found at position ")!==0){
                 return $rules->calculateAddNewLineRestrictor($input_string);
             }
             elseif(strlen($rules->obtainMultipleErrors($input_string))>1){
@@ -47,10 +48,11 @@ class StringCalculator
             }elseif(strcmp($rules->calculateAddNewLineRestrictor($input_string),"Number expected but newline found at position ")!==0){
                 return $rules->calculateAddNewLineRestrictor($input_string);
             }
-            elseif(strcmp($rules->obtainCustomSeparators($input_string),"Separator is ")!==0){
-                return $rules->obtainCustomSeparators($input_string);
+            elseif(strcmp($rules->addWithCustomSeparator($input_string),"nok")!==0){
+                return $rules->addWithCustomSeparator($input_string);
             }
             elseif(strlen($rules->obtainMultipleErrors($input_string))>1){
+                echo "im here";
                 return $rules->obtainMultipleErrors($input_string);
             }
             else{
@@ -66,26 +68,6 @@ class StringCalculator
             return array_sum($numbers);
         }
         return array_product($numbers);
-    }
-
-    public function addWithCustomSeparator(string $input_string):string{
-        $err1="expected ";
-        $err2=" but ";
-        $err3=" found: ";
-        $err4=" at position : ";
-        if(str_starts_with($input_string, '//')) {
-            //list: allow to have individual variables from array
-            list($delimiter, $numbers) = explode("\n", $input_string, 2);
-            //offset 2 cuz at position 0 and 1 are '//'
-            $aux = substr($delimiter, 2);
-            $delimiter = '/' . substr($delimiter, 2) . '/';
-        }
-        if(!empty($pos_fake_delimiter =strpos($numbers, ","))){
-            $fake_delimiter=",";
-            return $err1.$aux.$err3.$fake_delimiter.$err4.$pos_fake_delimiter;
-        }
-        $numbers = preg_split($delimiter, $numbers);
-        return array_sum($numbers);
     }
 
 }
