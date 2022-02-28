@@ -21,6 +21,8 @@ class StringCalculator
             $error = $this->obtainMultipleErrors($input_string);
             if( (intval($input_string[strlen($input_string)-1])) ==0){
                 return "Number expected but EOF found";
+            }elseif(strcmp($this->obtainCustomSeparators($input_string),"Separator is ")!==0){
+                return $this->obtainCustomSeparators($input_string);
             }
             elseif(strlen($error)>1){
                 return $error;
@@ -76,7 +78,7 @@ class StringCalculator
 
     private function obtainMultipleErrors(string $input_string):string{
         $multipleNegatives=$this->obtainMultipleNegatives($input_string);
-        $restrictorsTogether=$this->doestAllowRestrictorsWhenAreTogether($input_string,",");
+        $restrictorsTogether=$this->doesntAllowRestrictorsWhenAreTogether($input_string,",");
         return  $multipleNegatives.$restrictorsTogether;
     }
 
@@ -87,10 +89,15 @@ class StringCalculator
         return $error.=strval($pos1+$pos2);
     }
 
-    public function obtainCustomSeparators(string $input_string):string{
+    private function obtainCustomSeparators(string $input_string):string{
         if(str_starts_with($input_string, '//')) {
             list($sep, $numbers) = explode("\n", $input_string, 2);
             $sep = substr($sep, 2);
+            if(strcmp($sep,";")!==0){
+                $sep = "";
+            }
+        }else{
+            $sep = "";
         }
         $output="Separator is ";
         return $output.=$sep;
@@ -116,7 +123,7 @@ class StringCalculator
         return array_sum($numbers);
     }
 
-    private function doestAllowRestrictorsWhenAreTogether(string $input_string, string $separator):string{
+    private function doesntAllowRestrictorsWhenAreTogether(string $input_string, string $separator):string{
         $results = preg_split('/[;,]/', $input_string);
         $contains_empty = in_array("", $results, true);
         $err1 =  "Number expected but ";

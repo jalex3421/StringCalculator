@@ -85,8 +85,8 @@ class StringCalculatorTest  extends TestCase{
      * @test : allow to introduce your own separators
      */
     public function findCustomSeparatorBase(){
-        $res = $this->stringCalculator->obtainCustomSeparators("//;\n1;3");
-
+        $res = $this->stringCalculator->add("//;\n1;3");
+        echo $res;
         $this->assertEquals("Separator is ;",$res);
     }
 
