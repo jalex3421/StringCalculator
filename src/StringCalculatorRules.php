@@ -17,20 +17,6 @@ class StringCalculatorRules
         return $error;
     }
 
-    public function obtainCustomSeparators(string $input_string):string{
-        if(str_starts_with($input_string, '//')) {
-            list($sep, $numbers) = explode("\n", $input_string, 2);
-            $sep = substr($sep, 2);
-            if(strcmp($sep,";")!==0){
-                $sep = "";
-            }
-        }else{
-            $sep = "";
-        }
-        $output="Separator is ";
-        return $output.=$sep;
-    }
-
     public function obtainMultipleErrors(string $input_string):string{
         $multipleNegatives=$this->obtainMultipleNegatives($input_string);
         $restrictorsTogether=$this->doesntAllowRestrictorsWhenAreTogether($input_string,",");
@@ -83,6 +69,5 @@ class StringCalculatorRules
         }else{
             return "nok";
         }
-
     }
 }
