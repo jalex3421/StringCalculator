@@ -81,7 +81,6 @@ class StringCalculator
     }
 
     public function calculateAddNewLineRestrictor(string $input_string):string{
-        if(empty($input_string)){ return "0";}
         $pos1 = strpos($input_string, ","); //obtain position of comma
         $pos2 = strpos(substr($input_string,$pos1), "\n");
         $error="Number expected but newline found at position ";
@@ -98,7 +97,6 @@ class StringCalculator
     }
 
     public function AddWithCustomSeparator(string $input_string):string{
-        if(empty($input_string)){ return "0";}
         $err1="expected ";
         $err2=" but ";
         $err3=" found: ";
