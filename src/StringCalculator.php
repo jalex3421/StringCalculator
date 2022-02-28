@@ -96,7 +96,7 @@ class StringCalculator
         return $output.=$sep;
     }
 
-    public function AddWithCustomSeparator(string $input_string):string{
+    public function addWithCustomSeparator(string $input_string):string{
         $err1="expected ";
         $err2=" but ";
         $err3=" found: ";
