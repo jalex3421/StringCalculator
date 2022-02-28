@@ -67,7 +67,7 @@ class StringCalculatorTest  extends TestCase{
      * @test : doesnt allow new line in final position
      */
     public function addNewLineRestrictor(){
-        $res = $this->stringCalculator->calculateAddNewLineRestrictor("175.2,\n35");
+        $res = $this->stringCalculator->add("175.2,\n35");
 
         $this->assertEquals("Number expected but newline found at position 6",$res);
     }
