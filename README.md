@@ -2,5 +2,4 @@ PHP 8 testing base
 
 Run: composer install
 
-Kata realizada por Alejandro Meza. Se trata de solucionar el problema 
-StringCalculator a través de un enfoque iterativo e incremental mediante TDD.
+Kata performed by Alejandro Meza. It tries to solve the StringCalculator problem through an iterative and incremental approach using TDD.
