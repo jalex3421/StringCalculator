@@ -1,8 +1,19 @@
-name: GitHub Actions Demo
-on: [push]
+name: Octo Organization CI
+
+on:
+  push:
+    branches: [ $default-branch ]
+  pull_request:
+    branches: [ $default-branch ]
+
 jobs:
-  Explore-GitHub-Actions:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - run: composer install
-      - run: php vendor/bin/phpunit
+      - uses: actions/checkout@v2
+
+      - name: Run a one-line script
+        run: composer install
+              php vendor/bin/phpunit
+
